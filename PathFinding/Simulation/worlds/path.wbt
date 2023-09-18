@@ -1,0 +1,260 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/solids/protos/SolidBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/obstacles/protos/OilBarrel.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.3018219478211393 -0.575190076265737 -0.7603024976802781 5.074986255625988
+  position -1.058122850915695 -2.9064834780599487 3.134677609359648
+  follow "robot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 2.5 2.5 0
+  floorSize 5 5
+}
+OilBarrel {
+  translation 0.41 2 0.14630078116053796
+  rotation -0.01195561753861768 -0.017961052521979822 -0.9997672048039848 2.5223599045159986e-16
+  height 0.3
+  radius 0.1
+  physics Physics {
+  }
+}
+DEF robot Robot {
+  translation 0.12477941950627691 0.3498567051241051 -0.00021224891179653926
+  rotation 0.0022484487339029455 0.014660185247168512 0.9998900056740289 2.838458429396893
+  children [
+    InertialUnit {
+    }
+    GPS {
+    }
+    DEF body Transform {
+      translation 0 0 0.0415
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.333333 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.08
+            radius 0.045
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 24.455237279294785
+        anchor 0.045 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "motor_1"
+        }
+        PositionSensor {
+          name "ps_1"
+        }
+      ]
+      endPoint Solid {
+        translation 0.045 0 0.025
+        rotation -0.3155800551682718 0.8949731531921951 -0.315328850321708 1.6807393967513504
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 1 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.025
+            }
+          }
+        ]
+        boundingObject USE wheel
+        physics DEF wheel_physics Physics {
+        }
+      }
+    }
+    Camera {
+      translation 0 0 0.13
+      rotation 0 0 1 -1.4399003061004252
+      children [
+        DEF camera Shape {
+          appearance PBRAppearance {
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.01
+          }
+        }
+      ]
+      boundingObject USE camera
+      physics Physics {
+      }
+      recognition Recognition {
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 45.67888469774531
+        anchor -0.045 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "motor_2"
+        }
+        PositionSensor {
+          name "ps_2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.045 0 0.025
+        rotation -0.6003842205937299 -0.5288205823414874 -0.5999063088133593 4.1151256862712255
+        children [
+          USE wheel
+        ]
+        name "solid(1)"
+        boundingObject USE wheel
+        physics USE wheel_physics
+      }
+    }
+    Solid {
+      translation 0.015 -0.045 0.07
+      children [
+        DEF eye Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.005 0.005 0.005
+          }
+        }
+      ]
+      name "solid(2)"
+    }
+    Solid {
+      translation -0.015 -0.045 0.07
+      children [
+        USE eye
+      ]
+      name "solid(3)"
+    }
+  ]
+  boundingObject USE body
+  physics Physics {
+  }
+  controller "robot_controller"
+}
+SolidBox {
+  translation 1.63 2.5 0.05
+  size 0.75 1 0.1
+  appearance PBRAppearance {
+    baseColor 0.333333 0.333333 0.498039
+    roughness 0.5
+    metalness 0
+  }
+}
+SolidBox {
+  translation 4.125 4.13 0.05
+  name "box(1)"
+  size 0.75 0.75 0.1
+  appearance PBRAppearance {
+    baseColor 0.333333 0.333333 0
+    roughness 0.5
+    metalness 0
+  }
+}
+SolidBox {
+  translation 2.495 4 0.05
+  name "box(2)"
+  size 1 0.5 0.1
+  appearance PBRAppearance {
+    baseColor 0.203922 0.396078 0.643137
+    roughness 0.5
+    metalness 0
+  }
+}
+SolidBox {
+  translation 3.365 2.88 0.05
+  name "box(8)"
+  size 0.75 0.25 0.1
+  appearance PBRAppearance {
+    baseColor 0.458824 0.313725 0.482353
+    roughness 0.5
+    metalness 0
+  }
+}
+SolidBox {
+  translation 0.125 1.5 0.05
+  name "box(9)"
+  size 0.25 1 0.1
+  appearance PBRAppearance {
+    baseColor 1 0.666667 1
+    roughness 0.5
+    metalness 0
+  }
+}
+SolidBox {
+  translation 0.745 4.25 0.05
+  name "box(4)"
+  size 0.5 1 0.1
+  appearance PBRAppearance {
+    baseColor 0.45098 0.823529 0.0862745
+    roughness 0.5
+    metalness 0
+  }
+}
+SolidBox {
+  translation 4.625 2 0.05
+  name "box(7)"
+  size 0.25 1 0.1
+  appearance PBRAppearance {
+    baseColor 0.729412 0.741176 0.713725
+    roughness 0.5
+    metalness 0
+  }
+}
+SolidBox {
+  translation 3.995 0.63 0.05
+  name "box(5)"
+  size 0.5 0.25 0.1
+  appearance PBRAppearance {
+    baseColor 0.768627 0.627451 0
+    roughness 0.5
+    metalness 0
+  }
+}
+SolidBox {
+  translation 2.995 1.75 0.05
+  name "box(6)"
+  size 0.5 0.5 0.1
+  appearance PBRAppearance {
+    baseColor 0.560784 0.34902 0.00784314
+    roughness 0.5
+    metalness 0
+  }
+}
+SolidBox {
+  translation 1.505 0.75 0.05
+  name "box(3)"
+  size 1 0.5 0.1
+  appearance PBRAppearance {
+    baseColor 0 0.666667 1
+    roughness 0.5
+    metalness 0
+  }
+}
